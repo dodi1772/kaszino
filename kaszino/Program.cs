@@ -4,7 +4,26 @@
     {
         static void Main(string[] args)
         {
-            HighLow();
+            Console.Write("\t1. HighLow\n\t2. Színkitalálós\n\t3. Számtippelős\n\t4. Jackpot\nAdd meg melyik játék: ");
+            int opcio=Convert.ToInt32(Console.ReadLine());
+            switch (opcio)
+            {
+                case 1:
+                    HighLow();
+                    break;
+                case 2:
+                    szinjatek();
+                    break;
+                case 3:
+                    Tippelos();
+                    break;
+                case 4:
+                    Jackpot();
+                    break;
+                default:
+                    Console.WriteLine("Nem megfelelő bemenet.");
+                    break;
+            }
         }
         static void HighLow()
         {
@@ -73,6 +92,63 @@
             }
         }
 
-
+        static void szinjatek()
+        {
+            Console.Write("Adj meg egy tétet: ");
+            int penz=Convert.ToInt32(Console.ReadLine());
+            Console.Write("Adj meg egy színt(b/r): ");
+            char szin=Convert.ToChar(Console.ReadLine());
+            int binaris = 0;
+            if (szin=='r')
+            {
+                binaris = 1;
+            }
+            Random random = new Random();
+            int rand = random.Next(0, 2);
+            if (rand==binaris)
+            {
+                Console.WriteLine($"Eltaláltad a színt (a téted nőtt ennyivel: {penz} Egyenleg: {penz*2})");
+                penz = penz * 2;
+            }
+            else
+            {
+                Console.WriteLine("Nem talált.");
+            }
+        }
+        static void Tippelos()
+        {
+            Random random = new Random();
+            int rand=random.Next(1,100);
+            Console.Write("Add meg a kezdőértéket: ");
+            int kezdo=Convert.ToInt32(Console.ReadLine());
+            Console.Write("Add meg a végértéket: ");
+            int veg=Convert.ToInt32(Console.ReadLine());
+            if (rand>=kezdo&&rand<=veg)
+            {
+                Console.WriteLine($"Nyertél. A szám: {rand}");
+            }
+            else
+            {
+                Console.WriteLine($"Vesztettél. A szám: {rand}");
+            }
+        }
+        static void Jackpot()
+        {
+            Console.Write("Adj meg egy tétet: ");
+            int penz = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Adj meg egy számot 1 és 100 között: ");
+            int bemenet=Convert.ToInt32(Console.ReadLine());
+            Random random = new Random();
+            int rand= random.Next(1,100);
+            if (bemenet==rand)
+            {
+                penz = penz * 10;
+                Console.WriteLine($"Nyertél, gratulálok. A téted megtízszereződött. \nEgyenleg{penz}");
+            }
+            else
+            {
+                Console.WriteLine("Sajnos nem nyertél.");
+            }
+        }
     }
 }
